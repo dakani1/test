@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <script src="js/jquery.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #model{
+            position: fixed;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+
+        .modelWrap{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 360px;
+            -webkit-box-shadow:  0 0 10px rgba(0,0,0,0.2);
+            -moz-box-shadow:  0 0 10px rgba(0,0,0,0.2);
+            box-shadow:  0 0 10px rgba(0,0,0,0.2);
+            border: none;
+        +border: 1px solid #dee2e4;
+
+        }
+
+        .modelWrap .title{
+            font-size: 18px;
+            height: 60px;
+            line-height: 60px;
+            background-image: linear-gradient(to bottom,#f6faf9,#edf1f4);
+        +background : #eef6f4;
+            -ms-filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f6faf9', endColorStr='#edf1f4', gradientType=0);
+            filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f6faf9', endColorStr='#edf1f4', gradientType=0);
+            border-bottom: 1px solid #dee2e4;
+        }
+
+        .modelWrap .content{
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #6a6a6a;
+        }
+
+        .modelWrap .close{
+            float: right;
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 30px;
+            font-weight: bold;
+            color: #c4d7e0;
+        }
+
+        .modelWrap p{
+            margin-left: 20px;
+            color: #4f849e;
+        }
+    </style>
+</head>
+<body>
+
+<div id="model">
+    <div class="modelWrap">
+        <div class="title">
+            <span class="close">&times;</span>
+            <p>Modal Window</p>
+        </div>
+        <div class="content">
+            弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框弹框
+        </div>
+    </div>
+</div>
+
+<input id="modal" type="button" value="弹框"/>
+
+<script src="js/jquery.js"></script>
+<script>
+    (function (){
+        $(function (){
+            $("#modal").on("click",function (){
+                var model=$("#model");
+                modal(model);
+            });
+
+
+
+            function modal(target){
+                target.fadeIn("normal");
+                var modelWrap=target.find(".modelWrap");
+                var modelWrapH=modelWrap.height();
+                var modelWrapW=modelWrap.width();
+                modelWrap.css({
+                    "margin-left":-1*parseInt(modelWrapW/2),
+                    "margin-top":-1*parseInt(modelWrapH/2)
+                });
+            }
+
+            $(".close").on("click",function (){
+                $(this).parents("#model").fadeOut("normal");
+            });
+        });
+    })();
+</script>
+</body>
+</html>

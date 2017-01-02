@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>运动框架</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 200px;
+            height:200px;
+            background-color: red;
+            opacity: 0.3;
+            -ms-filter: Alpha(Opacity=30);
+            filter: Alpha(Opacity=30);
+            position: absolute;
+            top:50px;
+            left:0;
+
+        }
+
+
+
+        #line{
+            width: 1px;
+            height: 200px;
+            background-color: black;
+            position: absolute;
+            top:50px;
+            left:600px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main"></div>
+
+
+<div id="line"></div>
+
+
+<script>
+    window.onload=function (){
+        var main=document.getElementById("main");
+        var timer=null;
+        var now=1;
+        main.onclick=function (){
+            if(now==1){
+                move(this,"left",600);
+                now=0;
+            }else{
+                move(this,"left",0);
+                now=1;
+            }
+
+        };
+
+
+
+
+
+
+
+
+
+
+        function getStyle(obj,attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }else{
+                return getComputedStyle(obj,false)[attr];
+            }
+        }
+
+
+        function move(obj,attr,iTarget){
+
+            clearInterval(timer);
+            timer=setInterval(function (){
+                var nState=parseInt(getStyle(obj,attr));
+                if(nState<iTarget){
+                    speed=10;
+                }else{
+                    speed=-10;
+                }
+
+                console.log(nState);
+
+                if(nState!=iTarget){
+
+                    obj.style[attr] = nState + speed + "px";
+                }else {
+                    obj.style[attr]=iTarget+"px";
+                    clearInterval(timer);
+                }
+
+            },30);
+        }
+    };
+</script>
+</body>
+</html>

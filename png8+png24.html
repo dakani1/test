@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            background-color: red;
+        }
+
+        img{
+            border: 5px solid blue;
+        }
+
+        #main{
+            width: 100px;
+            height: 100px;
+            background-color:black;/*所有识别*/
+            .background-color:green\9; /*IE6、7、8识别*/
+            +background-color:blue;/*IE6、7识别*/
+            _background-color:yellow;/*IE6识别*/
+        }
+    </style>
+</head>
+<body>
+<img src="image/aa.png" alt=""/>
+<img src="image/aa1.png" alt=""/>
+
+<div id="main">
+    <script>
+        document.write("111");
+        document.write("222");
+    </script>
+</div>
+</body>
+</html>

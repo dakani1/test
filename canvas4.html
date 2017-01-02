@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=700;
+
+
+        var context=cvs.getContext("2d");
+
+        context.beginPath();
+        context.moveTo(0,350);
+        context.lineTo(1000,350);
+        context.lineWidth=1;
+        context.strokeStyle="blue";
+        context.stroke();
+
+
+
+        context.lineWidth=10;
+        context.lineCap="round";
+        context.lineJoin="round";
+
+        context.beginPath();
+        context.lineTo(100,350);
+        context.lineTo(500,350);
+        context.lineTo(500,200);
+        context.lineTo(700,400);
+        context.lineTo(500,600);
+        context.lineTo(500,450);
+        context.lineTo(100,450);
+        context.lineTo(100,350);
+
+        context.fillStyle="rgba(255,0,0,1)";
+        context.strokeStyle="rgba(0,255,0,0.5)";
+
+
+        context.fill();
+        context.stroke();
+
+
+
+
+    };
+</script>
+</body>
+</html>

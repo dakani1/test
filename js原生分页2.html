@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="render" content="webkit"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1.0"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #page{
+            width: 500px;
+            text-align: center;
+            margin: 100px auto;
+        }
+
+        #page a+a{
+            margin-left: 10px;
+        }
+
+        a,a:focus,a:visited{
+            color : blue;
+        }
+    </style>
+</head>
+<body>
+<div id="page">
+    <!--<a href="#1">首页</a>-->
+    <!--<a href="#2" >上一页</a>-->
+
+    <!--<a href="#1">[1]</a>-->
+    <!--<a href="#2">[2]</a>-->
+    <!--<a href="#3" id="thr">3</a>-->
+    <!--<a href="#4">[4]</a>-->
+    <!--<a href="#5">[5]</a>-->
+
+
+    <!--<a href="#4">下一页</a>-->
+    <!--<a href="#5">尾页</a>-->
+</div>
+
+
+<script>
+    var pageJson={
+        id:"page",
+        length:7,   //奇数
+        nowNum:1,
+        allNum:10,
+        callBack:function (nowN,allN){
+
+        }
+    };
+
+
+    page(pageJson);
+
+
+
+    function page(json){
+        if(!pageJson.id){return false;}
+
+        var wrapDiv=document.getElementById(json.id);
+        var length=pageJson.length||5;
+        var nowNum=pageJson.nowNum||1;
+        var allNum=pageJson.allNum||length;
+        var callBack=pageJson.callBack|| function (){};
+
+
+        if(nowNum>=((length+1)/2+1)&&allNum>=(length+1)) {
+            var oFirst = document.createElement("a");
+            oFirst.href = "#" + 1;
+            oFirst.innerHTML = "首页";
+            wrapDiv.appendChild(oFirst);
+        }
+
+        if(nowNum>1){
+            var oLeft=document.createElement("a");
+            oLeft.href="#"+(nowNum-1);
+            oLeft.innerHTML="上一页";
+            wrapDiv.appendChild(oLeft);
+        }
+
+
+
+        if(allNum<=length){
+            for(var i=1;i<=allNum;i++){
+                var oA=document.createElement("a");
+                oA.href="#"+i;
+                if(i==nowNum){
+                    oA.innerHTML=i;
+                }else{
+                    oA.innerHTML="["+i+"]";
+                }
+                wrapDiv.appendChild(oA);
+            }
+        }else{
+            for(var j=1;j<=length;j++){
+                var oAa=document.createElement("a");
+
+                if(nowNum<=((length+1)/2)){
+                    oAa.href="#"+j;
+                    if(j==nowNum){
+                        oAa.innerHTML=j;
+                    }else{
+                        oAa.innerHTML="["+j+"]";
+                    }
+                }else if(nowNum>((length+1)/2)&&nowNum<(allNum-2)){
+                    oAa.href="#"+(nowNum-((length+1)/2)+j);
+                    if(j==((length+1)/2)){
+                        oAa.innerHTML=nowNum;
+                    }else{
+                        oAa.innerHTML="["+(nowNum-((length+1)/2)+j)+"]";
+                    }
+                }else{
+                    oAa.href="#"+(allNum+j-length);
+                    if(j==(nowNum-allNum+length)){
+                        oAa.innerHTML=nowNum;
+                    }else{
+                        oAa.innerHTML="["+(allNum+j-length)+"]";
+                    }
+                }
+                wrapDiv.appendChild(oAa);
+            }
+
+        }
+
+        if(nowNum!=allNum){
+            var oRight=document.createElement("a");
+            oRight.href="#"+(nowNum+1);
+            oRight.innerHTML="下一页";
+            wrapDiv.appendChild(oRight);
+        }
+
+        if(nowNum<(allNum-2)&&allNum>=(length+1)){
+            var oLast=document.createElement("a");
+            oLast.href="#"+allNum;
+            oLast.innerHTML="尾页";
+            wrapDiv.appendChild(oLast);
+        }
+
+        callBack(json.nowNum,json.allNum);
+
+        var pg=document.getElementById("page");
+        var pageA=pg.getElementsByTagName("a");
+        for(var k=0;k<pageA.length;k++){
+            pageA[k].onclick=function (e){
+                var ev=e||window.event;
+                ev.cancelBubble=true;
+                nowNum=parseInt(this.getAttribute("href").substring(1));
+                pageJson.nowNum=nowNum;
+                pg.innerHTML="";
+                page(pageJson);
+                return false;
+            };
+        }
+
+    }
+
+</script>
+</body>
+</html>

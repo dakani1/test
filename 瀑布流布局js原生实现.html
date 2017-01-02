@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #container{
+            width: 1440px;
+            border: 1px solid red;
+            position: relative;
+            margin: 0 auto;
+            font-size: 0;
+        }
+        
+        #container .item{
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 5px solid #ccc;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            margin: 2px;
+        }
+
+        .item img{
+            width: 220px;
+            height: auto;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <!--<div class="item"><img src="image/P_00.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_01.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_02.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_03.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_04.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_05.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_06.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_07.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_08.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_09.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_010.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_011.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_012.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_013.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_014.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_015.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_016.jpg" /></div>-->
+    <!--<div class="item"><img src="image/P_017.jpg" /></div>-->
+</div>
+<script>
+    window.onload=function (){
+        var column=6;
+        var html="";
+        var container=document.getElementById("container");
+        var arr=[
+            {"title":"one","src":"image/P_00.jpg"},
+            {"title":"two","src":"image/P_01.jpg"},
+            {"title":"three","src":"image/P_02.jpg"},
+            {"title":"four","src":"image/P_03.jpg"},
+            {"title":"five","src":"image/P_04.jpg"},
+            {"title":"six","src":"image/P_05.jpg"},
+            {"title":"seven","src":"image/P_06.jpg"},
+            {"title":"eight","src":"image/P_07.jpg"}
+        ];
+
+        for(var i=0;i<6;i++){
+            html+="<div class='item'><img src="+arr[i].src+"/></div>";
+        }
+        container.innerHTML=html;
+    };
+</script>
+</body>
+</html>

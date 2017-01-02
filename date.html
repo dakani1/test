@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>日期对象的操作</title>
+</head>
+<body>
+<div id="main">
+
+</div>
+
+
+
+<script>
+    window.onload=function (){
+        var main=document.getElementById("main");
+        var timer=null;
+
+        var fDate=new Date();
+        var fsDate=fDate.setDate(29);
+        var fTime=fDate.getTime();
+
+
+
+       timer=setInterval(function (){
+           var nDate=new Date();
+           var nTime=nDate.getTime();
+           var destinTime=fTime-nTime;
+
+
+
+
+           var d=parseInt((destinTime)/(24*60*60*1000));
+           var h=parseInt(destinTime/(60*60*1000)-24*d);
+           var m=parseInt(destinTime/(60*1000) -24*60*d-60*h);
+           var s=parseInt(destinTime/(1000)-d*24*60*60-h*60*60-m*60);
+
+           console.log(d+","+h+","+m+","+s);
+       },1000);
+
+    };
+</script>
+
+
+
+
+
+</body>
+</html>

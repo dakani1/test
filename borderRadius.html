@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        #main{
+            width: 500px;
+            height: 500px;
+            border: 1px solid green;
+            position: relative;
+        }
+
+        #main div{
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        .one{
+            border-left: 10px solid gray;
+            border-top: 10px solid gray;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            width: 100px;
+            height: 100px;
+            margin-left: -60px;
+            margin-top: -60px;
+            -webkit-animation-delay: -0.5s;
+            -moz-animation-delay: -0.5s;
+            -o-animation-delay: -0.5s;
+            animation-delay: -0.5s;
+            -webkit-animation: rotate 1.3s linear infinite;
+            -o-animation: rotate 1.3s linear infinite;
+            animation: rotate 1.3s linear infinite;
+        }
+
+        .two{
+            border-left: 10px solid transparent;
+            border-top: 10px solid gray;
+            border-right: 10px solid gray;
+            border-bottom: 10px solid transparent;
+            width: 150px;
+            height: 150px;
+            margin-left: -85px;
+            margin-top: -85px;
+            -webkit-animation-delay: -0.8s;
+            -moz-animation-delay: -0.8s;
+            -o-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            -webkit-animation: rotate 1.2s linear infinite;
+            -o-animation: rotate 1.2s linear infinite;
+            animation: rotate 1.2s linear infinite;
+        }
+
+        .thr{
+            border-left: 10px solid transparent;
+            border-top: 10px solid transparent;
+            border-right: 10px solid gray;
+            border-bottom: 10px solid gray;
+            width: 200px;
+            height: 200px;
+            margin-left: -110px;
+            margin-top: -110px;
+            -webkit-animation-delay: -1s;
+            -moz-animation-delay: -1s;
+            -o-animation-delay: -1s;
+            animation-delay: -1s;
+            -webkit-animation: rotate 1.2s linear infinite;
+            -o-animation: rotate 1.2s linear infinite;
+            animation: rotate 1.2s linear infinite;
+        }
+
+        @keyframes rotate {
+            100%{
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="thr"></div>
+    </div>
+</body>
+</html>

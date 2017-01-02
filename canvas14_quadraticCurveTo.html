@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+
+        #cvs1{
+            display: none;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+
+
+<canvas id="cvs1">
+    您的浏览器不支持canvas1，请使用高版本浏览器。
+</canvas>
+
+
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=600;
+        var context=cvs.getContext("2d");
+        context.lineJoin="miter";
+        context.lineWidth=1;
+
+        context.fillStyle='red';
+        context.strokeStyle="green";
+
+
+
+
+//        drawMoon(context,20,100,100,30,10);
+//
+//
+//        function drawMoon(ctx,d,x,y,rot,sl){
+//
+//            ctx.save();
+//
+//            ctx.beginPath();
+//            ctx.translate(x,y);
+//            ctx.rotate(rot/180*Math.PI);
+//            ctx.scale(sl,sl);
+//            ctx.arc(0,0,10,1.5*Math.PI,0.5*Math.PI,true);
+//            ctx.moveTo(0,10);
+//            ctx.arcTo(d,0,0,-10,10*disT(0,10,d,0)/d);
+//            ctx.lineJoin="bevel";
+//
+//            ctx.fillStyle="blue";
+//            ctx.fill();
+//            ctx.restore();
+//
+//        }
+//
+//        function disT(x1,y1,x2,y2){
+//            return Math.sqrt(Math.pow((x2-x1),2)+Math.pow((y2-y1),2));
+//        }
+
+
+        drawMoon1(context,300,100,30,3);
+        function drawMoon1(ctx,x,y,rot,sl) {
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.translate(x, y);
+            ctx.rotate(rot / 180 * Math.PI);
+            ctx.scale(sl, sl);
+            ctx.arc(0, 0, 10, 1.5 * Math.PI, 0.5 * Math.PI, false);
+            ctx.moveTo(0, 10);
+            ctx.quadraticCurveTo(10, 0, 0, -10);
+            ctx.lineJoin = "bevel";
+
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.restore();
+        }
+        };
+
+</script>
+</body>
+</html>

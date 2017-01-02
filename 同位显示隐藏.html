@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #main{
+            padding: 1px;
+            width: 500px;
+            margin: 50px auto;
+        }
+        
+        #main .cont{
+            display: none;
+        }
+
+        #main:hover{
+            border: 1px solid red;
+            padding: 0;
+        }
+
+        #main:hover .cont{
+            display: block;
+        }
+
+        li{
+            list-style-image: url("image/ab.png");
+            list-style-position: inside;
+            border: 1px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <span>222222</span>
+        <div class="cont">
+            zheshineirong <br>
+            zheshineiorng <br>
+        </div>
+    </div>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+    </ul>
+</body>
+</html>

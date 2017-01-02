@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+//@import "compass/reset";
+
+
+body,div,ul,li,ol,dt,dt,dl,p,section {
+  padding: 0;
+  margin: 0;
+}
+
+
+header {
+  &:hover{
+    color: red;
+  }
+
+  p{
+    font-size: 20px;
+    &:hover{
+      color: blue;
+    }
+  }
+
+  section {
+    text-decoration: underline;
+  }
+}

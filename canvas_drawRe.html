@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=700;
+
+
+        var context=cvs.getContext("2d");
+        context.lineJoin="round";
+        context.lineCap="round";
+
+
+
+
+        var timer=null;
+        var x=100,y=100;
+        drawRect(context,x,y,300,300,10,"red","green");
+
+        drawRect(context,x+150,y+150,300,300,10,"rgba(255,0,0,1)","rgba(0,255,0,0.5)");
+
+
+        function drawRect(ctx,x,y,w,h,lineWidth,strokeStyle,fillStyle){
+            ctx.lineWidth=lineWidth;
+            ctx.strokeStyle=strokeStyle;
+            ctx.fillStyle=fillStyle;
+
+            ctx.fillRect(x,y,w,h);
+            ctx.strokeRect(x,y,w,h);
+
+        }
+
+    };
+</script>
+</body>
+</html>

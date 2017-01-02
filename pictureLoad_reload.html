@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>picture按需加载</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 1400px;
+            border: 1px solid red;
+            margin: 50px auto;
+            text-align: center;
+
+            padding-top: 100px;
+        }
+
+        img{
+            border: 10px solid #ccc;
+            margin:7px 7px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/1.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/2.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/3.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/4.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/5.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/6.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/7.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/8.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/9.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/10.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/11.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/12.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/13.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/14.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/15.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/16.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/17.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/18.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/19.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/20.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/21.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/22.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/23.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/24.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/25.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/26.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/27.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/28.jpg"  src="image/a.jpg" alt=""/>
+        <img class="lazyLoad"  osrc="http://120.25.83.114/test/image/29.jpg"  src="image/a.jpg" alt=""/>
+
+
+        <script src="package.js"></script>
+    <script src="js/jquery.js"></script>
+    <script>
+
+        window.onload=function (){
+            var lazyLoad=getClass("lazyLoad");
+//            var imageLazy=$("img[osrc]");
+//            reload(imageLazy);
+            load(lazyLoad);
+
+
+
+        };
+
+        window.onscroll=function (){
+            var lazyLoad=getClass("lazyLoad");
+            load(lazyLoad);
+        };
+
+
+
+        function load(obj){
+            var oImg=[];
+            for(var i=0;i<obj.length;i++){
+                obj[i].iOsrc=obj[i].getAttribute("osrc");
+                if(iTop(obj[i])){
+                    oImg[i]=new Image();
+                    oImg[i].src=obj[i].iOsrc;
+                    oImg[i].index=i;
+                    oImg[i].onload=function (){
+                        obj[this.index].setAttribute("src",this.src);
+                    }
+                }
+            }
+        }
+
+
+
+
+        function reload(obj){
+            for(var i=0;i<obj.length;i++){
+                var image=new Image();
+                image.src=obj.eq(i).attr("osrc");
+                image.onload=function (){
+                    console.log(i);
+                }
+            }
+        }
+
+
+        function iTop(obj){
+            var tTop=obj.offsetTop;
+            var windowScroll=document.documentElement.scrollTop||document.body.scrollTop;
+            var windowHeight=document.documentElement.clientHeight||document.body.clientHeight;
+            if(tTop <(windowHeight+windowScroll)){
+                return true;
+            }
+        }
+
+    </script>
+</body>
+</html>

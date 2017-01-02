@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=700;
+
+
+        var context=cvs.getContext("2d");
+        context.lineJoin="miter";
+        context.lineWidth=1;
+
+
+
+        var linear=context.createLinearGradient(0,0,0,cvs.height);
+        linear.addColorStop(0.1,"black");
+        linear.addColorStop(0.8,"#035");
+
+
+        context.fillStyle=linear;
+        context.fillRect(0,0,cvs.width,cvs.height);
+
+
+
+
+
+        for(var i=0;i<500;i++){
+            var x=Math.round(Math.random()*(cvs.width));
+            if(x<20||x>(cvs.width-20)){
+                continue;
+            }
+
+
+            var y=Math.round(Math.random()*cvs.height-300);
+            if(y<20){
+                continue;
+            }
+
+            var R=Math.round(Math.random()*16);
+            var r=Math.round(R/2);
+
+//            var color_r=Math.round(Math.random()*255);
+//            var color_g=Math.round(Math.random()*255);
+//            var color_b=Math.round(Math.random()*10);
+//            var color_a=Math.random();
+
+            var color_r=247;
+            var color_g=244;
+            var color_b=14;
+            var color_a=1;
+
+            var fillStyle="rgba("+color_r+","+color_g+","+color_b+","+color_a+")";
+            drawStar(context,x,y,R,r,fillStyle);
+
+        }
+
+
+
+
+
+        function drawStar(ctx,x,y,R,r,fillStyle){
+            ctx.beginPath();
+            for(var i= 0;i<5;i++){
+                ctx.lineTo(
+                        x+ Math.cos((-18-72*i)/180*Math.PI)*R,
+                        y+ Math.sin((-18-72*i)/180*Math.PI)*R);
+
+                ctx.lineTo(
+                        x+Math.cos((-54-72*i)/180*Math.PI)*r,
+                        y+ Math.sin((-54-72*i)/180*Math.PI)*r);
+            }
+            ctx.closePath();
+
+            ctx.fillStyle=fillStyle;
+            ctx.fill();
+        }
+    };
+</script>
+</body>
+</html>

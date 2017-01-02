@@ -1,0 +1,11 @@
+body,html,div,canvas{
+    padding: 0;
+    margin: 0;
+}
+
+
+#cvs{
+    border: 1px solid red;
+    margin: 0 auto;
+    display:block;
+}

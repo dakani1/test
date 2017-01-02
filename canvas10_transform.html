@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1600;
+        cvs.height=1000;
+
+
+        var context=cvs.getContext("2d");
+        context.lineJoin="miter";
+        context.lineWidth=10;
+        context.fillStyle="rgba(255,0,0,0.5)";
+        context.strokeStyle="rgba(0,255,0,0.5)";
+
+        var canvasP=cvs.getBoundingClientRect();
+         var widthNum=Math.floor((canvasP.width)/100);
+         var heightNum=Math.floor((canvasP.height)/100);
+
+       for(var i=1;i<widthNum;i++){
+           for(var j=1;j<heightNum;j++){
+               rule(context,i*100,100*j)
+           }
+       }
+
+        context.save();
+        context.beginPath();
+        context.fillRect(300,300,200,200);
+        context.strokeRect(300,300,200,200);
+        context.restore();
+
+
+        context.save();
+        context.beginPath();
+        context.rotate(-30/180*Math.PI);
+        context.fillRect(300,300,200,200);
+        context.strokeRect(300,300,200,200);
+        context.restore();
+
+
+
+        context.save();
+        context.beginPath();
+        context.translate(100,100);
+        context.rotate(-30/180*Math.PI);
+
+        context.transform(1,0,0,1,100,100);
+        context.fillRect(300,300,200,200);
+        context.strokeRect(300,300,200,200);
+        context.restore();
+
+
+        context.save();
+        context.beginPath();
+        context.rotate(-30/180*Math.PI);
+        context.translate(100,100);
+        context.fillRect(300,300,200,200);
+        context.strokeRect(300,300,200,200);
+        context.restore();
+
+
+
+
+
+        function rule(ctx,x,y){
+            ctx.beginPath();
+            ctx.arc(x,y,3,0,2*Math.PI);
+            ctx.fill();
+        }
+    };
+</script>
+</body>
+</html>

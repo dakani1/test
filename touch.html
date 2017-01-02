@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <script src="js/zepto.js"></script>
+    <script src="js/touch.js"></script>
+    <title></title>
+    <style>
+       #main{
+            padding: 0;
+            margin: 0;
+            width: 99%;
+            height: 500px;
+            border: 1px solid red;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="main"></div>
+    <script>
+        window.onload=function (){
+            $("#main").swipe(function (){
+                alert(11);
+            });
+//            main.addEventListener('touchstart',function (){
+//                console.log("start");
+//            });
+//
+//            main.addEventListener('touchmove',function (){
+//                console.log("move");
+//            });
+//
+//            main.addEventListener('touchend',function (){
+//                console.log("end");
+//            });
+        };
+    </script>
+</body>
+</html>

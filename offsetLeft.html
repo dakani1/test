@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            margin-left: 50px;
+        }
+
+        #top{
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="top"></div>
+    </div>
+
+
+    <script>
+        window.onload=function (){
+            var main=document.getElementById("main");
+            var top=document.getElementById("top");
+            var topLeft=top.offsetLeft;
+            alert(topLeft);
+        };
+    </script>
+</body>
+</html>

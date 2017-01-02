@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            display: -webkit-flex;
+            height: 500px;
+            background-color:gray;
+            flex: 12;
+            /*flex-direction: column;*/
+            /*-webkit-flex-direction: column;*/
+            /*align-items: flex-end;*/
+
+            flex-direction: row;
+            -webkit-flex-direction: row;
+
+
+            justify-content: center;
+            -webkit-justify-content: center;
+
+            align-items: center;
+            -webkit-align-items: center;
+        }
+        
+        .item{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 5px;
+            flex: 4;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+    </div>
+
+
+    <style>
+        #nn{
+            display: flex;
+            display:-webkit-flex;
+            flex-direction:row;
+            -webkit-flex-direction:row;
+            justify-content: flex-start;
+            -webkit-justify-content: flex-start;
+        }
+
+
+        #nn li{
+            margin: 5px;
+            flex:50;
+            background-color: red;
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+        }
+
+
+    </style>
+
+    <ul id="nn">
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+        <li>f</li>
+        <li>g</li>
+        <li>h</li>
+    </ul>
+</body>
+</html>

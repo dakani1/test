@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,height=device-height"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        body{
+            width: 100%;
+            height: 100%;
+        }
+
+        #main{
+            width: 100%;
+            height:100%;
+            background-color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="main"></div>
+
+
+    <script>
+        window.onload=function (){
+            var htbody=document.getElementsByTagName("html")[0];
+            var hgt=document.body.clientHeight||document.documentElement.clientHeight;
+            htbody.style.height=hgt+"px";
+        };
+    </script>
+</body>
+</html>

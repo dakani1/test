@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>瀑布流jquery实现</title>
+    <script src="js/jquery.js"></script>
+    <script>
+//        var arr=[0,2,8,5,9,5,0];
+//        var minN=Math.min.apply(null,arr);
+//        alert(minN);
+//        alert(typeof $.inArray(minN,arr));
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;}
+        #main{
+            width: 100%;
+            font-size: 0;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .item{
+            padding: 4px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            font-size: 16px;
+            border: 1px solid red;
+        }
+
+        .pic{
+            width: 180px;
+            height: auto;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 5px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_00.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_02.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_03.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_04.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_05.jpg" alt=""/>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_06.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_07.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_08.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_09.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_010.jpg" alt=""/>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_011.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_012.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_013.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_014.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_015.jpg" alt=""/>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_016.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_017.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_018.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_019.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_016.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_017.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_018.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_019.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_018.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_019.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_016.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_017.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_018.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <img src="image/P_019.jpg" alt=""/>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(window).on("load",function (){
+
+            var main=$("#main");
+            var item=main.find(".item");
+            var picArr=[];
+            var ajaxLoad=[];
+            var page=0;
+
+            waterfull(main,item);
+
+            $(window).on("scroll",function (){
+                if(checkLoad()){
+                    loadData(main,item);
+                }
+
+            });
+
+
+            function loadData(wrapObj,obj){
+                var html="";
+                if(!ajaxLoad["json"]){
+                    ajaxLoad["json"]= $.getJSON("json.json");
+                }
+
+                ajaxLoad["json"].done(function (data){
+                    var jsonL=getJsonLength(data);
+
+                    page++;
+                    if(page<jsonL){
+                        $.each(data["page"+page],function (index,value){
+                            html+='<div class="item"><div class="pic1"><img src="'+data["page"+page][index]["src"]+'"/> </div> </div>';
+                        });
+                        wrapObj.append(html);
+                        waterfull(wrapObj,obj);
+                    }
+                });
+
+
+            }
+
+            function checkLoad(){
+                var item=main.find(".item");
+                var objLast=item.last();
+                var objLastT=objLast.offset().top;
+                var winH=$(window).scrollTop()+$(window).height();
+
+                return (objLastT<winH);
+            }
+
+            function waterfull() {
+                var main=$("#main");
+                var item=main.find(".item");
+                var mainWidth = main.outerWidth();
+                var itemWidth = item.outerWidth();
+
+                var column = Math.floor(mainWidth / itemWidth);
+                main.width(itemWidth * column);
+                $.each(item, function (index) {
+                    if (index < column) {
+                        var nowH = item.eq(index).outerHeight();
+                        picArr[index] = nowH;
+                    } else {
+
+                        var min = Math.min.apply(null, picArr);
+                        var minIndex = $.inArray(min, picArr);
+                        $(this).css({
+                            "position": "absolute",
+                            "left": minIndex * itemWidth,
+                            "top": min
+                        });
+                        picArr[minIndex] = min + $(this).outerHeight();
+                        main.css("height", Math.max.apply(null, picArr));
+                    }
+                });
+            }
+            function getJsonLength(json){
+                var arr=[];
+                for(var a in json){
+                    arr.push("a");
+                }
+                var lth=arr.length;
+                return lth;
+            }
+        });
+
+    </script>
+</body>
+</html>

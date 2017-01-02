@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .piano{
+            width: 1000px;
+            margin: 50px auto;
+            border: 1px solid #a3a3a3;
+            font-size: 0;
+        }
+
+        .piano li{
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            font-size: 14px;
+            text-align: center;
+            line-height: 30px;
+            width: 12%;
+            border-right: 1px dotted #cbcbcb;
+        }
+
+        #au{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <ul class="piano">
+        <li>11111111111</li>
+        <li>222222222</li>
+        <li>3333333333</li>
+        <li>444444444</li>
+        <li>55555</li>
+        <li>66666666</li>
+        <li>77777</li>
+    </ul>
+    <div id="au"></div>
+    <input type="button" id="muted" value="muted"/>
+    <script>
+        window.onload=function (){
+            var muted=document.getElementById("muted");
+            var openA=true;
+
+            var auArr=["a","b","c","d","e","f","g"];
+            var timer=null;
+            var aPiano=document.getElementsByClassName("piano")[0];
+            var aPianoLi=aPiano.getElementsByTagName("li");
+            var oAu=document.getElementById("au");
+            for(var i=0;i<aPianoLi.length;i++){
+                aPianoLi[i].index=i;
+                aPianoLi[i].onmouseover=function (e){
+                    var ev=e||window.event;
+                    ev.cancelBubble=true;
+                    if(openA){
+                        var oAudio=document.createElement("audio");
+                        oAudio.src="video_audio/"+auArr[this.index]+"4.mp3";
+                        oAudio.controls="controls";
+                        oAu.appendChild(oAudio);
+                        oAudio.play();
+                        return false;
+                    }
+                };
+
+                aPianoLi[i].onmouseout=function (){
+                    timer=setInterval(function (){
+                        var aAu=oAu.getElementsByTagName("audio");
+                        for(var i=0;i<aAu.length;i++){
+                            if(aAu[i].paused){
+                                oAu.removeChild(aAu[i]);
+                            }
+                            var aAuu=oAu.getElementsByTagName("audio");
+                            if(aAuu.length==0){
+                                clearInterval(timer);
+                            }
+                        }
+                    },300);
+                };
+            }
+
+
+
+
+
+
+            muted.onclick=function (){
+                if(openA){
+                    openA=false;
+                }else{
+                    openA=true;
+                }
+
+                alert(openA);
+            };
+
+
+
+
+        };
+    </script>
+</body>
+</html>

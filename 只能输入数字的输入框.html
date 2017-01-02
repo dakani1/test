@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>只能输入数字的输入框</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <label for="num">请输入纯数字:<input type="text" id="num"></label>
+    <label for="num">请输入纯字母:<input type="text" id="str"></label>
+
+
+    <script>
+        window.onload=function (){
+            var num=document.getElementById("num");
+            var str=document.getElementById("str");
+
+            num.onkeydown=function (event){
+                var e=event||window.event;
+                if((e.keyCode>47&&e.keyCode<57)||e.keyCode>95&&e.keyCode<106){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            };
+        }
+    </script>
+</body>
+</html>

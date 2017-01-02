@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+
+        #cvs1{
+            display: none;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+
+
+<canvas id="cvs1">
+    您的浏览器不支持canvas1，请使用高版本浏览器。
+</canvas>
+
+
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=600;
+        var context=cvs.getContext("2d");
+        context.lineJoin="miter";
+        context.lineWidth=1;
+
+        context.strokeStyle="green";
+        context.globalCompositeOperation="xor";
+
+        context.beginPath();
+        context.arc(100,100,100,100,0,2*Math.PI,false);
+        context.fillStyle="red";
+        context.fill();
+        context.clip();
+
+
+        for(var i=1;i<200;i++){
+            drawCirle(context);
+        }
+
+
+
+
+
+
+        function drawCirle(ctx){
+            context.beginPath();
+            var x=Math.random()*(cvs.width);
+            var y=Math.random()*(cvs.height);
+            var radius=Math.random()*30;
+
+
+            var r=Math.round(Math.random()*255);
+            var g=Math.round(Math.random()*255);
+            var b=Math.round(Math.random()*255);
+            var alpha=Math.random();
+
+
+
+            ctx.fillStyle="rgb("+r+","+g+","+b+")";
+            ctx.globalAlpha=alpha;
+            ctx.arc(x,y,radius,0,2*Math.PI,false);
+            ctx.fill();
+        }
+
+
+    };
+
+</script>
+</body>
+</html>

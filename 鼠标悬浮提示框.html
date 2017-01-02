@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            font-family: "Microsoft YaHei", arial, sans-serif;
+        }
+
+        .triangle{
+            border-top: 10px solid #191919;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: none;
+        }
+
+        .tTip{
+            display:inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            background-color: #191919;
+            color: white;
+            width: auto;
+            padding: 4px 8px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            position: absolute;
+            top: 0;
+            left: 50%;
+        }
+
+        .tTip span{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-bottom: -6px;
+            margin-left: -10px;
+        }
+
+        .tooltip{
+            position: relative;
+        }
+
+
+        #main{
+            width: 1000px;
+            margin: 100px auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="main">
+        <a class="tooltip" href="" title="360doc个人图书馆">图书馆</a>
+
+
+        <div> <a class="tooltip" href="" title="360doc个人图书馆">图书馆</a></div>
+        <p> <a class="tooltip name" href="" title="360doc个人图书馆">图书馆</a></p>
+
+    </div>
+
+
+
+
+    <script>
+        window.onload=function (){
+
+            toolTip("tooltip");
+        };
+
+
+        function toolTip(className){
+            var toolT=getClass(className);
+            for(var i=0;i<toolT.length;i++){
+                toolT[i].html="";
+                toolT[i].onmouseover=function (){
+                    this.html=this.innerHTML;
+                    var title=this.getAttribute("title");
+                    var appendDiv=document.createElement("div");
+                    appendDiv.className="tTip";
+                    appendDiv.innerHTML=title+'<span class="triangle"></span>';
+                    this.appendChild(appendDiv);
+                    appendDiv.style.marginLeft=Math.floor(-1*(appendDiv.offsetWidth)/2)+"px";
+                    appendDiv.style.marginTop=-1*Math.floor((appendDiv.offsetHeight)+5)+"px";
+                    return false;
+                };
+                toolT[i].onmouseout=function (){
+                    this.innerHTML=this.html;
+                    return false;
+                };
+            }
+        }
+
+
+        function getClass(cname){
+            if(document.getElementsByClassName){
+                return document.getElementsByClassName(cname);
+            }else{
+                var arr=[];
+                var re=/\s/g;
+                var tagName=document.getElementsByTagName("*");
+                for(var i=0;i<tagName.length;i++){
+                    var classNameArr=tagName[i].className.split(re);
+                    for(var j=0;j<classNameArr.length;j++){
+                        if(classNameArr[j]==cname){
+                            arr.push(tagName[i]);
+                        }
+                    }
+                }
+                return arr;
+            }
+        }
+
+    </script>
+</body>
+</html>

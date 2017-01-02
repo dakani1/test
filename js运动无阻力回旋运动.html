@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #main{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            opacity: 0.3;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+        }
+
+        #line{
+            width: 1px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 500px;
+            background-color:black;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="btn" value="开始"/>
+<div id="main"></div>
+
+
+<div id="line"></div>
+
+<script src="package.js"></script>
+<script>
+    window.onload=function() {
+        var main = document.getElementById("main");
+        var btn = document.getElementById("btn");
+
+//        总结：1.运动中，必须要先关闭定时器，然后再开
+//             2.运动中速度一定要取整数。（（所有的运动一定要做速度取整操作）
+
+
+//        弹性运动：是速度+=
+//            有阻力弹性运动：速度+=   速度*=
+//        缓冲运动：speed=（a-b）/c；
+
+        btn.onclick=function (){
+            animate(main,"left",500)
+        };
+
+        function animate(obj,attr,value){
+            obj.timer=null;
+            var speed=0;
+            var oldVal=0;
+            clearInterval(obj.timer);
+
+
+
+            obj.timer=setInterval(function (){
+                oldVal=parseInt(getStyle(obj,attr));
+                speed+=parseInt((value-oldVal)/80);
+
+                obj.style[attr]=oldVal+speed+"px";
+
+            },30);
+
+        }
+
+
+    };
+
+</script>
+</body>
+</html>

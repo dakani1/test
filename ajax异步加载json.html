@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<script>
+
+    var n=0;
+    var url="http://61.144.253.234:54018/JiShuiJieKou/TJYBService.asmx?op=GetPaiMing/";
+    LinkTest(url);
+
+    $(document).ajaxStop(function (){
+        alert(n);
+    });
+
+    function LinkTest(url) {
+        abc();
+        function abc(){
+            $.ajax({
+                url:url,
+                timeout:2000,
+                type:"post",
+                data:{
+                    "time":"out"
+                },
+                success:function (){
+                },
+                error: function (err) {
+                    if (err.readyState == 4) {
+                        if (err.status == 200) {
+                            n=1;
+                        }
+                        else {
+                            n=2;
+                        }
+                    }
+                    else {
+                        n=3;
+                    }
+                },
+                complete:function (){
+
+                }
+            });
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>

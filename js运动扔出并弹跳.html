@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #main{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+            position: absolute;
+            top: 350px;
+            left: 0;
+            opacity: 0.3;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+        }
+
+        #line{
+            height: 1px;
+            width: 300px;
+            position: absolute;
+            top: 350px;
+            left: 0;
+            background-color:black;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="btn" value="开始"/>
+<div id="main"></div>
+
+
+<div id="line"></div>
+
+<script src="package.js"></script>
+<script>
+    window.onresize=window.onload=function() {
+        var main = document.getElementById("main");
+        var btn = document.getElementById("btn");
+        var offsetH=main.offsetHeight;
+        var winH=document.documentElement.clientHeight||document.body.offsetHeight;
+        var T=winH-offsetH;
+
+
+        var offsetW=main.offsetWidth;
+        var winW=document.documentElement.clientWidth||document.body.offsetWidth;
+        var L=winW-offsetW;
+
+
+
+
+//        总结：1.运动中，必须要先关闭定时器，然后再开
+//             2.运动中速度一定要取整数。（（所有的运动一定要做速度取整操作）
+
+
+//        弹性运动：是速度+=
+//            有阻力弹性运动：速度+=   速度*=
+//        缓冲运动：speed=（a-b）/c；
+        var disX=0;
+        var disY=0;
+        var oldClientX=0;
+        var oldClientY=0;
+        var speedX=0;
+        var speedY=0;
+
+        var timer=null;
+
+
+        main.onmousedown=function (event){
+            var e=event||window.event;
+            clearInterval(timer);
+
+            disX= e.clientX-this.offsetLeft;
+            disY= e.clientY-this.offsetTop;
+            oldClientX=e.clientX;
+            oldClientY= e.clientY;
+
+
+            document.onmousemove=function (event){
+                var e=event||window.event;
+                if(!+[1,]){
+                    main.setCapture();
+                }
+                main.style.left= e.clientX-disX+"px";
+                main.style.top= e.clientY-disY+"px";
+
+                speedX= e.clientX-oldClientX;
+                speedY=e.clientY-oldClientY;
+
+                oldClientX=Math.round(e.clientX);
+                oldClientY= Math.round(e.clientY);
+            };
+
+            document.onmouseup=function (){
+                if(!+[1,]){
+                    main.releaseCapture();
+                }
+                document.onmousemove=null;
+                document.onmouseup=null;
+                startMove(main,T);
+            };
+            return false;
+
+        };
+
+
+//        var speedX=20;
+//        var speedY=-60;
+
+        function startMove(obj){
+            clearInterval(timer);
+            timer=setInterval(function (){
+
+//                speedY=(target-obj.offsetTop)/10;
+                speedY+=9.8;
+
+                speedY=Math.round(speedY);
+
+                var l=obj.offsetLeft+speedX;
+                var t=obj.offsetTop+speedY;
+
+
+
+                if(t<0){
+                    obj.style.top=0;
+                    speedY*=-1;
+                }else if(t>T){
+                    obj.style.top=T+"px";
+                    speedY*=-0.7;
+                }else{
+                    obj.style.top=t+"px";
+                }
+
+
+                if(l<0){
+                    obj.style.left=0;
+                    speedX*=-1;
+                }else if(l>L){
+                    obj.style.left=L+"px";
+                    speedX*=-1;
+                }else{
+                    obj.style.left=l+"px";
+                    speedX*=0.97;
+                }
+
+                if(Math.round(speedX)==0&&Math.round(speedY)==0){
+                    speedX=0;
+                    speedY=0;
+                    clearInterval(timer);
+                }
+
+
+            },30);
+        }
+    };
+
+</script>
+</body>
+</html>

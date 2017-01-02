@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+</head>
+<body>
+<form id="ajax-form" action="http://api.jquery.com/" method="get">
+    <fieldset>
+        <div class="text">
+            <label for="title">Search</label>
+            <input type="text" id="title" name="s">
+        </div>
+        <div class="actions">
+            <button type="submit">Request</button>
+        </div>
+    </fieldset>
+</form>
+
+
+<script>
+    $(document).ready(function() {
+        var $ajaxForm = $('#ajax-form'),
+                $response = $('#response');
+        $ajaxForm.on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: 'http://book.learningjquery.com/api/',
+                dataType: 'jsonp',
+                data: {
+                    title: $('#title').val()
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,122 @@
+<!doctype html> 
+    <html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <title>瀑布流</title>
+        <style>
+        	*{
+        		padding: 0px;
+        		margin: 0px;
+        	}
+        	body{
+        		background-color: #ccc;
+        	}
+        	.container{
+        		width:80%;
+        		margin: 0 auto;
+        	}
+        	ul{
+        		list-style: none;
+        	}
+        	#water li{
+				width:240px;
+				float:left;
+				padding:10px;
+			}
+        	#water li div{
+				padding:10px;
+				background-color:#fff;
+				margin-bottom:10px;
+			}
+        </style> 
+    </head>
+    <body>
+        <div id="container" class="container">
+
+        </div>
+        <script>
+        	var pic_from=0;
+        	var pic_num=10;
+        	var li_width=240;
+        	window.onload=function(){
+        		init();
+        		loadPic();
+        	}
+        	   /*
+        		*init()用于创建ul li
+        		*
+        		*/			
+        	function init(){
+        		var div_width = document.getElementById('container').offsetWidth;
+				var column_number = Math.floor(div_width / li_width);
+        		var ul = document.createElement('ul');
+        		ul.id="water";
+        		for(var i=0;i<column_number;i++){
+        			var li = document.createElement('li');
+        			ul.appendChild(li);
+        		}
+        		document.getElementById('container').appendChild(ul);
+        	}
+        	window.onscroll=function(){
+        		//求三个高度
+        		var document_height=document.documentElement.offsetHeight;//文档高度
+        		var view_height=document.documentElement.clientHeight;//可视窗口的高度
+        		var scroll_height=document.body.scrollTop || document.documentElement.scrollTop;
+        		if(document_height-view_height-scroll_height<200){
+        			pic_from += pic_num;
+					loadPic();
+        		}
+        	}
+        	   /*
+        		*通过Ajax加载图片，处理从data.php页面传过来的json数据
+        		*
+        		*/	
+        	function loadPic(){
+        		if(window.XMLHttpRequest){
+        			var xhr = new XMLHttpRequest();
+        		}else{
+        			var xhr = new AactiveXObj('Microsoft.XMLHTTP');
+        		}
+        		xhr.onreadystatechange=function(){
+        			if(xhr.status==200&&xhr.readyState==4){
+        				var jsonStr=xhr.responseText;
+        				eval("var dataList="+jsonStr);
+        				makeHtml(dataList);
+        			}
+        		};
+        		xhr.open('get','data.php?form='+pic_from +'&num='+pic_num,true);
+        		xhr.send();
+        	}
+        	   /*
+	        	*
+	        	*找出最短的li并添加div img
+	        	*
+	        	*/
+        	function makeHtml(dataList){
+        		//这个dataList的显示的是image的条数
+        		for(var i=0;i<dataList.length;i++){
+        			//得到li的集合
+        			var lis = document.getElementById('water').getElementsByTagName('li');
+        			//找出最短的那个高度进行加载
+        			//假设第一个li是最短的，让后面的都去和这个区比较
+        			var iHeight= lis[0].offsetHeight;
+        			var oli= lis[0];
+        			for(var j=0;j<lis.length;j++){
+        				if(iHeight>lis[j].offsetHeight){
+        					iHeight=lis[j].offsetHeight;
+        					oli = lis[j];
+        				}
+        			}
+        			var div = document.createElement('div');
+        			var img = document.createElement('img');
+        			img.src= dataList[i].image;
+        			var p = document.createElement('p');
+        			p.innerHTML=dataList[i].title;
+        			div.appendChild(img); 
+        			div.appendChild(p); 
+        			oli.appendChild(div);
+        		}
+        	}
+        </script>
+    </body>
+ 	</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title></title>
+</head>
+<body>
+    <input type="text" list="input_list" name="text" placeholder="请输入邮箱"/>
+    <datalist id="input_list"></datalist>
+</body>
+<script type="text/javascript"  src="js/jquery.js"></script>
+<script type="text/javascript">
+    function inputList(input,list){
+        var mailBox = [
+            "@qq.com",
+            "@sina.com",
+            "@163.com",
+            "@126.com",
+            "@yahoo.com.cn",
+            "@gmail.com",
+            "@sohu.com"
+        ];
+
+        input.bind('input propertychange', function() {
+            var key = input.val();
+            if(key.indexOf("@") != -1){
+                key = key.slice(0,key.indexOf("@"));
+            }
+            var mailBoxLen = mailBox.length;
+            var html = "";
+            for(var i=0; i<mailBoxLen; i++){
+                html += '<option value="'+ key + mailBox[i] +'"></option>';
+            }
+            list.html(html);
+        });
+
+    }
+
+    inputList($("input"),$("#input_list"));
+</script>
+</html>

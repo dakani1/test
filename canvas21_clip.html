@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=600;
+
+
+        var context=cvs.getContext("2d");
+        context.lineWidth=30;
+
+        var linear=context.createLinearGradient(0,0,cvs.width,cvs.height);
+        linear.addColorStop(0,"yellow");
+        linear.addColorStop(0.3,"orange");
+        linear.addColorStop(1,"red");
+
+        context.fillStyle=linear;
+        context.fillRect(0,0,cvs.width,cvs.height);
+
+
+        context.beginPath();
+        context.moveTo(100,100);
+        context.lineTo(500,100);
+        context.lineTo(500,500);
+        context.closePath();
+        context.fillStyle="green";
+        context.strokeStyle="green";
+        context.stroke();
+        context.clip();
+
+
+
+        context.fillStyle=linear;
+        context.fillRect(0,0,cvs.width,cvs.height);
+
+
+    };
+</script>
+</body>
+</html>

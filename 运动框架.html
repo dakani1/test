@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <link rel="stylesheet" href="style/reset.css"/>
+    <title></title>
+    <style>
+        #main{
+            width: 100px;  height: 100px;  position: absolute;  top: 50px;  left: 0;  background-color: darkolivegreen;
+            opacity:1;  -ms-filter:Alpha(Opacity=100);  filter: Alpha(Opacity=100);  }
+        #line1{width: 1px;height: 300px;position: absolute;top: 50px;left: 500px;background-color: black;  }
+        #line2{width: 1px;height: 300px;position: absolute;top: 50px;left: 1000px;background-color: black;  }
+        #operate{width: 100%;margin: 0 auto;height: 50px;border-bottom: 1px solid green;text-align: center;}
+        input{width: 80px;height: 35px;background-color: gray;color: white;}
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+    <div id="line1"></div>
+    <div id="line2"></div>
+
+    <div id="operate">
+        <input type="button" value="500px"/>
+        <input type="button" value="1000px"/>
+        <input type="button" value="opacity:1"/>
+        <input type="button" value="opacity:0.5"/>
+    </div>
+
+
+
+
+    <script src="moveFrame.js"></script>
+    <script type="application/javascript">
+
+        var main=document.getElementById("main");
+        var operate=document.getElementById("operate");
+        var operateInput=operate.getElementsByTagName("input");
+
+        operateInput[0].onclick=function (){
+            lineMove(main,"left",500);
+        };
+
+        operateInput[1].onclick=function (){
+            lineMove(main,"left",1000);
+        };
+
+
+        operateInput[2].onclick=function (){
+            lineMove(main,"opacity",1);
+        };
+
+        operateInput[3].onclick=function (){
+            lineMove(main,"opacity",0.5);
+        };
+
+
+    </script>
+</body>
+</html>

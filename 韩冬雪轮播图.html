@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+</head>
+<body>
+<!--shift()   方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。-->
+<!--unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。-->
+<!--push()    方法可向数组的末尾添加一个或多个元素，并返回新的长度。-->
+<!--pop()     方法用于删除并返回数组的最后一个元素。-->
+
+
+<div id="cont"></div>
+<input type="button" id="btnLeft" value="点击向左"/>
+<input type="button" id="btnRight" value="点击向右"/>
+
+<script src="js/jquery.js"></script>
+<script>
+
+    var cont=document.getElementById("cont");
+    var btnLeft=document.getElementById("btnLeft");
+    var btnRight=document.getElementById("btnRight");
+
+
+    var arr=["a","b","c","d"];
+    cont.innerHTML=arr;
+
+
+
+    btnLeft.onclick=function (){
+        arr=exchange(arr,"left");
+        cont.innerHTML=arr;
+    };
+
+
+
+
+    btnRight.onclick=function (){
+        arr=exchange(arr,"right");
+        cont.innerHTML=arr;
+    };
+
+
+
+    function exchange(array,direction){
+        if(direction=="left"){
+            array.push(array[0]);
+            array.shift(array[0]);
+        }else if(direction=="right"){
+            array.unshift(array[array.length-1]);
+            array.pop(array[array.length-1]);
+        }
+        return array;
+    }
+</script>
+</body>
+</html>

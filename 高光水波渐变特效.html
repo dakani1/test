@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+       *{
+           padding:0;
+           margin: 0;
+           font-family: "Microsoft YaHei",arial, sans-serif;
+       }
+
+        #main{
+            width: 100%;
+            height: 100%;
+        }
+
+        #main{
+            background: #535353;
+        }
+
+        .flow{
+            background-image: -webkit-linear-gradient(left, #167993, #fbe500 25%, #167993 50%, #fbe500 75%, #167993);
+            background-image: linear-gradient(left, #167993, #fbe500 25%, #167993 50%, #fbe500 75%, #167993);
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            background-size: 200% 100%;
+            -webkit-animation: name 4s infinite ease-in-out;
+            -o-animation: name 4s infinite ease-in-out;
+            animation: name 4s infinite ease-in-out;
+        }
+
+        .one{
+            text-align: center;
+            font-size: 80px;
+            line-height: 160px;
+            font-weight: bold;
+        }
+        .two{
+            text-align: center;
+            font-size: 40px;
+            line-height: 40px;
+            font-weight: bold;
+        }
+
+        @keyframes name {
+            0%{
+                background-position: 0 0;
+            }
+            100%{
+                background-position: -100% 0;
+             }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var bodyH=document.body.clientHeight||document.documentElement.clientHeight;
+        document.body.style.height=bodyH+"px";
+    </script>
+    <div id="main">
+        <pre class="flow one">
+山本无忧，因雪白头；水本无愁，因风起皱</pre>
+
+    </div>
+
+
+
+</body>
+</html>

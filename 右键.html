@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>右键菜单</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu{
+            width: 100px;
+            height:300px;
+            border:1px solid red;
+            position: fixed;
+            left:0;
+            top:0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="menu">
+</div>
+
+<script>
+window.onload=function (){
+    var menu=document.getElementById("menu");
+    document.ondblclick=document.oncontextmenu=function (event){
+        var e=event||window.event;
+        menu.style.display="block";
+
+        menu.style.left=e.clientX+"px";
+        menu.style.top=e.clientY+"px";
+        return false;
+    };
+
+
+    document.onclick=function (event){
+        var e=event||window.event;
+
+        var eTarget=e.srcElement||e.target;
+        if(eTarget!=menu){
+            menu.style.display="none";
+        }
+        return false;
+    };
+};
+</script>
+</body>
+</html>

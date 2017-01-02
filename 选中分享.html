@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 1000px;
+            margin: 10px auto;
+            border: 1px solid red;
+        }
+        
+        #main p{
+            text-indent: 2em;
+        }
+
+        #list{
+            position:absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        #list li{
+            display: block;
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+            background-color: red;
+        }
+
+        #list li a{
+            display: block;
+            width: 50px;
+            height: 50px;
+            border: 1px solid blue;
+            background-color: blue;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="main">
+    <ul id="list">
+        <li><a href="" target="_blank"></a></li>
+    </ul>
+    <p>
+        北京时间8月18日上午，2016年里约奥运会田径大项结束了男子200米半决赛争夺，
+        牙买加选手博尔特以19秒78获得半决赛第一，和博尔特同组的加拿大选手德格拉塞以19秒80排名第二。
+        争冠热门之一的加特林被淘汰。
+    </p><p>
+    第一组美国选手勒肖恩-梅里特实力惊人，他一路领先，最后以19秒94名列第一小组第一，而法国著名白人跑将勒马特雷也不含糊，
+    虽然他道次靠外，但无论弯道技术还是平跑，都表现出极佳状态，最后他以20秒01排名第二。两人直接晋级。牙买加选手阿什梅德只以20秒31列第四。
+</p><p>
+    博尔特在第二组第四道出场，同组的有百米季军德格拉塞，排在第五道。这组迎战的美国选手是韦布。拿下百米冠军之后，
+    博尔特如今显得非常轻松，这组毫无悬念，实力突出的博尔特起跑给力，弯道时已经看出明显优势，转到100米直道时，博尔特匹马领先，
+    此时他刻意放慢速度，笑着看德格拉塞在身边紧追，加拿大人在达到终点前一瞬追上了博尔特，两人笑着齐过终点。最后博尔特以19秒78名列小组第一，
+    德格拉塞19秒80列第二，两人直接晋级。
+</p><p>
+        第三组加特林出场，被排在第三道。约翰-布雷克在第五道，欧锦赛冠军、西班牙的霍特兰德在第四道。这组加特林开始优势明显，
+        但后半程在没确立优势的前提下，速度降了不少。局面立刻变得很细微，巴拿马选手埃德华德最终以20秒07获得第一，在欧锦赛100米决赛上演超级
+        逆转的荷兰老将马蒂纳，本场半决赛同样让人惊叹，他从第六一路赶到第二，20秒10！两人直接晋级。由于未直接晋级里最快两选手分别是20秒08和
+        20秒09，这样小组第三，跑20秒13的加特林就太淘汰，布雷克也出了局。
+    </p>
+    <p>
+        北京时间8月18日上午，2016年里约奥运会田径大项结束了男子200米半决赛争夺，
+        牙买加选手博尔特以19秒78获得半决赛第一，和博尔特同组的加拿大选手德格拉塞以19秒80排名第二。
+        争冠热门之一的加特林被淘汰。
+    </p><p>
+    第一组美国选手勒肖恩-梅里特实力惊人，他一路领先，最后以19秒94名列第一小组第一，而法国著名白人跑将勒马特雷也不含糊，
+    虽然他道次靠外，但无论弯道技术还是平跑，都表现出极佳状态，最后他以20秒01排名第二。两人直接晋级。牙买加选手阿什梅德只以20秒31列第四。
+</p>
+
+
+    <script src="js/jquery.js"></script>
+    <script>
+        window.onload=function (){
+            var main=document.getElementById("main");
+            var list=document.getElementById("list");
+            main.onmouseup=function (ev){
+                var e=ev||window.event;
+                list.style.display="none";
+                e.cancelBubble=true;
+                var x= e.clientX;
+                var y= e.clientY;
+                var selectedText=selectText();
+               if(selectedText.length>10){
+                    setTimeout(function (){
+                        list.style.display="block";
+                        list.style.left=x+"px";
+                        list.style.top=y+"px";
+                    },300);
+               }
+            };
+
+
+
+            list.onclick=function (ev){
+                var e=ev||window.event;
+                e.cancelBubble=true;
+                e.stopPropagation();
+                window.location.href="http://service.weibo.com/share/share.php?appkey=&title="+selectText()+"&url="+window.location.href;
+
+                return false;
+            };
+        };
+
+        function selectText(){
+            if(document.selection){
+                return document.selection.createRange().text;
+            }else{
+                return window.getSelection().toString();
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #canvas{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+
+        #cvs{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+<script>
+    window.onload=function (){
+        var canvas=document.getElementById("canvas");
+        canvas.width=1000;
+        canvas.height=600;
+        var context=canvas.getContext("2d");
+
+        var cvs=document.getElementById("cvs");
+        var ctx=cvs.getContext("2d");
+
+
+        var mouseDown=false;
+        var loaded=false;
+
+
+
+        var image=new Image();
+        image.src="image/farmer.jpg";
+        image.onload=function (){
+            context.drawImage(image,0,0,canvas.width,canvas.height);
+            var imageWidth=image.width;
+            var imageHeight=imageWidth*0.6;
+
+            cvs.width=imageWidth;
+            cvs.height=imageHeight;
+            ctx.drawImage(image,0,0,cvs.width,cvs.height);
+            loaded=true;
+        };
+
+
+
+
+        canvas.onmousedown=function (event){
+            event.preventDefault();
+            mouseDown=true;
+        };
+
+
+        canvas.onmousemove=function (event){
+            event.preventDefault();
+
+
+            if(mouseDown){
+                clipImage(event);
+            }
+        };
+
+
+        canvas.onmouseup=function (){
+            event.preventDefault();
+            mouseDown=false;
+            context.clearRect(0,0,canvas.width,canvas.height);
+            context.drawImage(image,0,0,canvas.width,canvas.height);
+        };
+
+
+        function clipImage(event){
+            var clientRect=getBound(canvas);
+            var x=event.clientX-clientRect.x;
+            var y=event.clientY-clientRect.y;
+            context.clearRect(0,0,canvas.width,canvas.height);
+            context.drawImage(image,0,0,canvas.width,canvas.height);
+            context.save();
+            drawCircle(context,x,y,100,"red","blue");
+            context.clip();
+            context.drawImage(cvs,-x,-y,2*canvas.width,2*canvas.height);
+            context.restore();
+        }
+
+
+
+        function getBound(obj){
+            var objBounding=obj.getBoundingClientRect();
+            return {x:objBounding.left,y:objBounding.top};
+        }
+
+
+
+        function drawCircle(ctx,x,y,radius,fillStyle,strokeStyle){
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x,y,radius,0,2*Math.PI,false);
+            ctx.fillStyle=fillStyle||"";
+            ctx.strokeStyle=strokeStyle||"";
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        }
+    };
+</script>
+</body>
+</html>

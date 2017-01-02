@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 200px;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+            -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+            -webkit-line-clamp: 3; /** 显示的行数 **/
+            overflow: hidden;  /** 隐藏超出的内容 **/
+        }
+    </style>
+</head>
+<body>
+    <p id="main">
+        AVI – Short for Audio Video Interleaved(also Audio Video Interleave). Even though we know avi format is Audio Video Interleaved,
+        but we don’t know how to play/convert/upload/store avi format,...
+    </p>
+</body>
+</html>

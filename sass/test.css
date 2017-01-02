@@ -1,0 +1,14 @@
+body, div, ul, li, ol, dt, dt, dl, p, section {
+  padding: 0;
+  margin: 0; }
+
+header:hover {
+  color: red; }
+header p {
+  font-size: 20px; }
+  header p:hover {
+    color: blue; }
+header section {
+  text-decoration: underline; }
+
+/*# sourceMappingURL=test.css.map */

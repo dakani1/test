@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="render" content="webkit"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1.0"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        #page{
+            width: 1000px;
+            text-align: center;
+            margin: 100px auto;
+        }
+
+        #page a+a{
+            margin-left: 10px;
+        }
+
+        a,a:focus,a:visited{
+            color : blue;
+        }
+
+        #list{
+            width: 1000px;
+            border: 1px solid red;
+            margin: 0 auto;
+            font-size: 0;
+            position: relative;
+            height: 420px;
+        }
+
+        #list li{
+            width: 190px;
+            height: 190px;
+            margin: 5px;
+            font-size: 14px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+<ul id="list">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<div id="page">
+
+</div>
+
+<script src="package.js"></script>
+<script></script>
+<script>
+
+    var content={
+        title:[
+            "标题1","标题2","标题3","标题4","标题5","标题6","标题7","标题8","标题9","标题10",
+            "标题11","标题12","标题13","标题14","标题15","标题16","标题17","标题18","标题19","标题20",
+            "标题21","标题22","标题23","标题24","标题25","标题26","标题27","标题28","标题29","标题30",
+            "标题31","标题32","标题33","标题34","标题35","标题36","标题37","标题38","标题39","标题40",
+            "标题41","标题42","标题43","标题44","标题45","标题46","标题47","标题48","标题49","标题50",
+            "标题51","标题52","标题53","标题54","标题55","标题56","标题57","标题58","标题59","标题60",
+            "标题61","标题62","标题63","标题64","标题65","标题66","标题67","标题68","标题69","标题70",
+            "标题71","标题72","标题73","标题74","标题75","标题76","标题77","标题78","标题79","标题80",
+            "标题81","标题82"
+        ]
+    };
+
+
+    var pageJson={
+        id:"page",
+        length:5,
+        nowNum:1,
+        allNum:parseInt((content.title.length)/10+1),
+        callBack:function (nowN,allN){
+            action (nowN,allN);
+        }
+    };
+
+
+    page(pageJson);
+
+
+    function action (nowN,allN){
+        var list=document.getElementById("list");
+
+
+        if(nowN==allN){
+            var innHtml="";
+            for(var n=0;n<(content.title.length-(nowN-1)*10);n++){
+                innHtml+="<li></li>";
+            }
+            list.innerHTML=innHtml;
+        }else{
+            var innH="";
+            for(var a=0;a<10;a++){
+                innH+="<li></li>";
+            }
+            list.innerHTML=innH;
+        }
+
+
+        var listLi=list.getElementsByTagName("li");
+        var arr=[];
+
+
+        for(var i= 0;i<listLi.length;i++){
+            var oLeft=parseInt(listLi[i].offsetLeft);
+            var oTop=listLi[i].offsetTop;
+            arr.push({
+                "oLeft":oLeft,
+                "oTop":oTop
+            });
+        }
+
+
+
+        for(var j= 0;j<listLi.length;j++){
+            listLi[j].innerHTML=content.title[(nowN-1)*10+j];
+            listLi[j].style.position="absolute";
+            listLi[j].style.margin=0;
+            listLi[j].style.left=arr[j].oLeft+"px";
+            listLi[j].style.top=arr[j].oTop+"px";
+        }
+
+
+
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>

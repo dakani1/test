@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .tab_tit .active{
+            color: red;
+        }
+
+        .tab_cont>div{
+            display: none;
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+        }
+
+        .tab_cont .active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <ul class="tab_tit">
+            <li class="active">选项卡一</li>
+            <li>选项卡二</li>
+            <li>选项卡三</li>
+        </ul>
+        <div class="tab_cont">
+            <div class="active">11111111111111111111</div>
+            <div>22222222222222222222</div>
+            <div>33333333333333333333</div>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload=function (){
+            var tab_titLi=$(".tab_tit").find("li");
+        };
+    </script>
+</body>
+</html>

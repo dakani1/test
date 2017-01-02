@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            height: 3000px;
+            
+        }
+        
+        #main{
+            width: 1000px;
+            height: 0;
+            margin: 400px auto;
+            border:10px solid red;
+            background: url("image/farmer.jpg") center bottom no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+    
+</div>
+
+<script src="js/jquery.js"></script>
+<script>
+    (function ($){
+        $(document).ready(function (){
+            $(document).scroll(function (){
+                var oBody=$("body");
+                var scrollT=$(document).scrollTop();
+                var windowH=$(window).height();
+                var bodyH=oBody.height();
+                var rate=parseInt(scrollT/(bodyH-windowH)*1000);
+//                $("#main").css("background-position","center"+" "+(-1*2852+500+rate)+"px");
+                $("#main").css("height",scrollT);
+            });
+        });
+    })(jQuery);
+</script>
+</body>
+</html>

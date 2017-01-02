@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #cvs{
+            margin: 10px auto;
+            display: block;
+            border: 1px solid red;
+        }
+
+        #cvs1{
+            display: none;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cvs">
+    您的浏览器不支持canvas，请使用高版本浏览器。
+</canvas>
+
+
+
+<canvas id="cvs1">
+    您的浏览器不支持canvas1，请使用高版本浏览器。
+</canvas>
+
+
+
+<script>
+    window.onload=function (){
+        var cvs=document.getElementById("cvs");
+        cvs.width=1000;
+        cvs.height=600;
+        var context=cvs.getContext("2d");
+        context.lineJoin="miter";
+        context.lineWidth=10;
+
+        context.fillStyle='red';
+        context.strokeStyle="green";
+
+        drawCirlRect(context,100,100,200,200,20);
+
+
+        drawRoundRect(context,400,100,300,300,20);
+
+
+        context.lineWidth=0;
+
+
+
+
+        function drawCirlRect(ctx,x,y,w,h,radius){
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x+radius,y);
+            ctx.lineTo(x+w-radius,y);
+            ctx.arc(x+w-radius,y+radius,radius,1.5*Math.PI,0,false);
+
+            ctx.lineTo(x+w,y+h-radius);
+            ctx.arc(x+w-radius,y+h-radius,radius,0,0.5*Math.PI,false);
+
+            ctx.lineTo(x+radius,y+h);
+            ctx.arc(x+radius,y+h-radius,radius,0.5*Math.PI,Math.PI,false);
+
+            ctx.lineTo(x,y+radius);
+            ctx.arc(x+radius,y+radius,radius,Math.PI,1.5*Math.PI,false);
+
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        }
+
+
+
+        function drawRoundRect(ctx,x,y,w,h,radius){
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x+radius,y);
+            ctx.arcTo(x+w,y,x+w,y+radius,radius);
+            ctx.arcTo(x+w,y+h,x+w-radius,y+h,radius);
+            ctx.arcTo(x,y+h,x,y+h-radius,radius);
+            ctx.arcTo(x,y,x+radius,y,radius);
+
+
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        }
+
+
+
+
+
+        drawMoon(context,20,100,100,30,10);
+
+
+        function drawMoon(ctx,d,x,y,rot,sl){
+
+            ctx.save();
+            ctx.translate(x,y);
+            ctx.rotate(rot/180*Math.PI);
+            ctx.scale(sl,sl);
+            ctx.beginPath();
+
+            ctx.arc(0,0,10,0.5*Math.PI,1.5*Math.PI,true);
+            ctx.moveTo(0,10);
+            ctx.arcTo(d,0,0,-10,10*disT(0,10,d,0)/d);
+
+
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.restore();
+
+        }
+
+        function disT(x1,y1,x2,y2){
+            return Math.sqrt(Math.pow((x2-x1),2)+Math.pow((y2-y1),2));
+        }
+
+
+
+        doubleLine(context);
+        function doubleLine(ctx){
+
+            ctx.beginPath();
+            ctx.moveTo(100,5);
+            ctx.lineTo(500,5);
+
+            ctx.moveTo(100,20);
+            ctx.lineTo(500,20);
+            ctx.strokeStyle="blue";
+            ctx.lineWidh=10;
+            ctx.stroke();
+
+        }
+
+    };
+
+</script>
+</body>
+</html>

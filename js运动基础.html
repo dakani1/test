@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #main{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+
+        #line{
+            width: 1px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 500px;
+            background-color:black;
+        }
+
+    </style>
+</head>
+<body>
+    <input type="button" id="btn" value="开始"/>
+    <div id="main"></div>
+
+
+    <div id="line"></div>
+
+
+    <script>
+        window.onload=function(){
+            var main=document.getElementById("main");
+            var btn=document.getElementById("btn");
+
+            var timer=null;
+            var state=0;
+
+            btn.onclick=function (){
+                if(state==0){
+                    startMove(main,500,10);
+                    state=1;
+                }else{
+                    startMove(main,0,-10);
+                    state=0;
+                }
+            };
+
+
+
+            function startMove(obj,iTarget,iSpeed){
+                clearInterval(timer);
+                timer=setInterval(function (){
+                    if(obj.offsetLeft!=iTarget){
+                        obj.style.left=obj.offsetLeft+iSpeed+"px";
+                    }else{
+                        obj.style.left=iTarget+"px";
+                        clearInterval(timer);
+                    }
+                },30);
+            }
+
+        }
+    </script>
+</body>
+</html>

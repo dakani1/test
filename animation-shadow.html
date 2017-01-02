@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        #main{
+            width: 50px;
+            height: 50px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            background-color: gray;
+            margin: 100px auto;
+            -webkit-box-shadow: 0 0 0 black;
+            -moz-box-shadow: 0 0 0 black;
+            box-shadow: 0 0 0 black;
+            -webkit-animation: shadow 1s ease-in-out 0s infinite normal;
+            -o-animation: shadow 1s ease-in-out 0s infinite normal;
+            animation: shadow 1s ease-in-out 0s infinite normal;
+        }
+
+        #main:hover{
+
+        }
+
+        @keyframes shadow {
+            100%{
+                -webkit-box-shadow: 0 0 100px transparent;
+                -moz-box-shadow: 0 0 100px transparent;
+                box-shadow: 0 0 100px transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+
+    <div class="name"></div>
+    <div class="name"></div>
+    <div class="name"></div>
+    <div class="name"></div>
+    <div class="name"></div>
+    <div class="name"></div>
+</body>
+</html>

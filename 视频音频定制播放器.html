@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{padding:0;margin:0;list-style: none;}
+    </style>
+</head>
+<body>
+    <video id="vdo" controls>
+        <source src="video_audio/Intermission-Walk-in_512kb.mp4"/>
+        <source src="video_audio/johann_sebastian_bach_air.ogg"/>
+    </video>
+    <div id="operate">
+        <input type="button" id="power" value="开始/暂停"/>
+        <input type="button" id="currentT" value="00:00:00"/>
+        <input type="button" id="duration" value="00:00:00"/>
+        <input type="button" id="muted" value="静音/取消静音"/>
+        <input type="button" id="fullScreen" value="全屏"/>
+    </div>
+
+
+    <script>
+        window.onload=function (){
+            var vdo=document.getElementById("vdo");
+            var power=document.getElementById("power");
+            var currentT=document.getElementById("currentT");
+            var duration=document.getElementById("duration");
+            var muted=document.getElementById("muted");
+            var fullScreen=document.getElementById("fullScreen");
+            var timer=null;
+//            console.log(vdo.duration);
+//            console.log(vdo.paused);
+//            console.log(vdo.muted);
+//            console.log(vdo.volume);
+//            console.log(vdo.ended);
+//            console.log(vdo.currentTime);
+//            console.log(vdo.error);
+
+//            vdo.onmouseover=function (){
+//                this.play();
+//            };
+//
+//            vdo.onmouseout=function (){
+//                this.pause();
+//            };
+//            vdo.poster="image/8.jpg";
+            vdo.currentTime=23;
+
+
+            var curT="00:00:00";
+            vdo.onclick=power.onclick=function (){
+                if(vdo.paused){
+                    vdo.play();
+                    timer=setInterval(function (){
+                        curT=currentT.value=time(parseInt(vdo.currentTime)+1);
+                    },1000);
+
+                }else{
+                    vdo.pause();
+                    currentT.value=curT;
+                    clearInterval(timer);
+                }
+            };
+
+
+
+            duration.value=time(parseInt(vdo.duration));
+
+
+
+            muted.onclick=function (){
+                if(vdo.muted){
+                    vdo.volume=1;
+                    vdo.muted=false;
+                }else{
+                    vdo.volume=0;
+                    vdo.muted=true;
+                }
+            };
+
+
+            fullScreen.onclick=function (){
+                vdo.webkitRequestFullscreen();
+            };
+
+
+            function time(nowT){
+                var hour=parseInt(nowT/3600);
+                var minute=parseInt((nowT-hour*3600)/60);
+                var sec=nowT%60;
+                timeStr=toDouble(hour)+":"+toDouble(minute)+":"+toDouble(sec);
+                return timeStr;
+            }
+
+            function toDouble(num){
+                if(num<10){
+                    num="0"+num;
+                }else{
+                    num=""+num;
+                }
+                return num;
+            }
+
+
+
+        };
+    </script>
+</body>
+</html>

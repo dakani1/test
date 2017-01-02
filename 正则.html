@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>正则表达式---智能社</title>
+</head>
+<body>
+
+
+<form action="">
+    <label for="email"><input type="email" id="email" placeholder="请输入邮箱"></label>
+    <label for="btn"><input type="button" id="btn" value="校验邮箱"> </label>
+</form>
+
+<script>
+
+
+    window.onload=function (){
+        var iEmail=document.getElementById("email");
+        var oBtn=document.getElementById("btn");
+
+
+
+        oBtn.onclick=function (){
+            iEmailValue=iEmail.value;
+
+            var re=/^[a-z1-9]\w+@[a-z1-9]+\.[a-z]+$/g;
+            var result=re.test(iEmailValue);
+            if(result){
+                alert("合法邮箱");
+            }else{
+                alert("fei法邮箱");
+            }
+        };
+
+
+
+    };
+//    var str="nice22 235do meet58 Mee98tt";
+////    var re=new RegExp("\d+","g");
+//    var re=/mee|do/ig;
+//    alert(str.match(re));
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

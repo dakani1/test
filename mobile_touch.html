@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #main{
+            width: 320px;
+            height: 200px;
+            margin: 30px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #main ul{
+            height: 100%;
+            font-size: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #main li{
+            width: 320px;
+            height: 100%;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            font-size: 16px;
+        }
+
+        #main li:nth-child(2n){
+            background-color: red;
+        }
+
+        #main li:nth-child(2n+1){
+            background-color: green;
+        }
+    </style>
+
+
+
+    <script src="package.js"></script>
+    <script>
+        window.onload=function (){
+            var main=document.getElementById("main");
+            var mainUl=document.getElementById("mainUl");
+            var mainLi=getClass("mainLi");
+
+
+            mainUl.style.width=mainLi[0].offsetWidth*mainLi.length+"px";
+
+
+            var downX=0;
+            var downOffsetLeft=0;
+            var touching=false;
+            var num=0;
+            var l=0;
+
+            bind(main,"touchstart",function (ev){
+                touching=true;
+                ev.preventDefault();
+                var touch=ev.changedTouches[0];
+                downX=touch.pageX;
+                downOffsetLeft=mainUl.offsetLeft;
+            });
+
+            bind(main,"touchmove",function (ev){
+                ev.preventDefault();
+                if(touching==true){
+                    var touch=ev.changedTouches[0];
+                    l=touch.pageX-downX;
+                    if((num==0&&l>0)||(num==(mainLi.length-1)&&l<0)){
+//                      mainUl.style.left=downOffsetLeft+Math.round(l/3)+"px";
+
+                        animate(mainUl,"left",downOffsetLeft+Math.round(l/3));
+                    }else{
+//                      mainUl.style.left=downOffsetLeft+l+"px";
+
+                        animate(mainUl,"left",downOffsetLeft+l);
+                    }
+                }
+            });
+
+
+            bind(main,"touchend",function (ev){
+                ev.preventDefault();
+                var mainWidth=main.offsetWidth;
+                var disT=Math.abs(l)>Math.round(mainWidth/2);
+
+
+                if (disT&&l<0&&num<(mainLi.length-1)){
+                    num++;
+                }else if(disT&&l>0&&num>0){
+                    num--;
+                }
+
+
+                if(num==0){
+//                    mainUl.style.left=0;
+                    animate(mainUl,"left",0);
+                }else if(num==(mainLi.length)){
+//                    mainUl.style.left=-1*mainLi[0].offsetWidth*(mainLi.length-1)+"px";
+
+                    animate(mainUl,"left",-1*mainLi[0].offsetWidth*(mainLi.length-1));
+                }else{
+//                    mainUl.style.left=-1*mainLi[0].offsetWidth*num+"px";
+
+
+                    animate(mainUl,"left",-1*mainLi[0].offsetWidth*num);
+                }
+
+
+                touching=false;
+
+            });
+
+
+
+        };
+    </script>
+</head>
+<body>
+    <div id="main">
+        <ul id="mainUl">
+            <li class="mainLi">1111</li>
+            <li class="mainLi">2222</li>
+            <li class="mainLi">333</li>
+            <li class="mainLi">444</li>
+            <li class="mainLi">555</li>
+            <li class="mainLi">666</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>腾讯-今日话题-右上角分享按钮</title>
+<style type="text/css">
+*{margin: 0;padding: 0;border: 0;}
+#main{width: 500px; height: 100px; border: 2px solid #b00;margin: 0 auto;background: url(images/wrapBg.png) repeat;padding: 20px;}
+#main a.item{width: 34px; height: 33px;display: block; float: right;margin-right: 15px;background: url(images/wbset.png) 0 0 no-repeat;text-decoration: none;color: #786123;font: 12px/33px "Microsoft Yahei",arial;position: relative;}
+#main a.item span:hover{text-decoration: underline;}
+#main a b{width: 34px; height: 33px;display: block;background: url(images/wbIconBg2.png) no-repeat;position: absolute;right: 0;}
+#main a span{float: left;}
+
+#main a.qz b{background-position:-1px 0;}
+#main a.tw b{background-position:-43px 0;}
+#main a.xw b{background-position:-85px 0;}
+#main a.ph b{background-position:-175px 0;}
+#main a.rs b{background-position:-128px 0;}
+
+/*==.info==*/
+.info{text-align: center; padding-top: 20px;font: 16px arial;}
+</style>
+<script type='text/javascript' src='js/jquery-1.6.3.min.js'></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+	$qzsp = $('a.qz span');
+	$twsp = $('a.tw span');
+	$xwsp = $('a.xw span');
+	$phsp = $('a.ph span');
+	$rssp = $('a.rs span');
+
+	$qza = $('a.qz');
+	$twa = $('a.tw');
+	$xwa = $('a.xw');
+	$pha = $('a.ph');
+	$rsa = $('a.rs');
+	
+	$('a span').hide();
+	//QQ空间
+	$qza.hover(function(){
+		$(this).animate({width:"100px",paddingLeft:"10px"},300);
+		$qzsp.show();
+	},function(){
+		$(this).animate({width:"34px",paddingLeft:"0"},300);
+		$qzsp.hide();
+	});
+	//腾讯微博
+	$twa.hover(function(){
+		$(this).animate({width:"120px",paddingLeft:"10px"},300);
+		$twsp.show();
+	},function(){
+		$(this).animate({width:"34px",paddingLeft:"0"},300);
+		$twsp.hide();
+	});
+	//新浪微博
+	$xwa.hover(function(){
+		$(this).animate({width:"120px",paddingLeft:"10px"},300);
+		$xwsp.show();
+	},function(){
+		$(this).animate({width:"34px",paddingLeft:"0"},300);
+		$xwsp.hide();
+	});
+	//用手机浏览
+	$pha.hover(function(){
+		$(this).animate({width:"100px",paddingLeft:"10px"},300);
+		$phsp.show();
+	},function(){
+		$(this).animate({width:"34px",paddingLeft:"0"},300);
+		$phsp.hide();
+	});
+	//RSS订阅
+	$rsa.hover(function(){
+		$(this).animate({width:"80px",paddingLeft:"10px"},300);
+		$rssp.show();
+	},function(){
+		$(this).animate({width:"34px",paddingLeft:"0"},300);
+		$rssp.hide();
+	});
+});
+</script>
+</head>
+<body>
+<div id="main">
+	<a href="#" class="item rs" title="RSS订阅"><span>RSS订阅</span><b></b></a>
+	<a href="#" class="item ph" title="用手机浏览"><span>用手机浏览</span><b></b></a>
+	<a href="#" class="item xw" title="分享到新浪微博"><span>分享到新浪微博</span><b></b></a>
+	<a href="#" class="item tw" title="分享到腾讯微博"><span>分享到腾讯微博</span><b></b></a>
+	<a href="#" class="item qz" title="分享到空间"><span>分享到空间</span><b></b></a>
+</div>
+<div class="info">
+欢迎来我的博客 <a href="http://blog.qikafei.com/" target="_blank">超声播</a>
+</div>
+</body>
+</html>

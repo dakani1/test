@@ -1,0 +1,207 @@
+<!Doctype>
+
+
+
+<hmtl>
+<head>
+<meta charset="utf-8"/>
+
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+
+#main{
+	position: relative;
+
+}
+.box{
+	padding:15px 0 0 15px;
+	float:left;
+}
+.pic{
+	padding:10px;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.pic img{
+	width:165px;
+	height:auto;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+	window.onload=function(){
+
+		var dataInt={"data":[{"src":"images/0.jpg"},{"src":"images/1.jpg"},{"src":"images/2.jpg"},{"src":"images/3.jpg"},{"src":"images/4.jpg"},{"src":"images/5.jpg"},{"src":"images/6.jpg"},{"src":"images/7.jpg"}]};
+
+		waterfall('main','box');
+		window.onscroll = function(){
+			if(checkScrollSlide){
+				var oParent = document.getElementById('main');
+				for(var i =0;i<dataInt.data.length;i++){
+					var oBox = document.createElement('div');
+					oBox.className = 'box';
+					oParent.appendChild(oBox);
+
+					var oPic = document.createElement('div');
+					oPic.className = 'pic';
+
+					oBox.appendChild(oPic);
+
+					var oImg = document.createElement('img');
+
+					oImg.src = dataInt.data[i].src;
+					oPic.appendChild(oImg);
+				}
+
+				waterfall('main','box');
+			}
+		}
+	}
+
+	function waterfall(parent,box){
+		//将main下的所有class为box的元素
+		var oParent = document.getElementById(parent);
+		var oBoxs = getByClass(oParent,box);
+
+		var oBoxW = oBoxs[0].offsetWidth;
+		var cols = Math.floor(document.documentElement.clientWidth/oBoxW);
+
+
+		oParent.style.cssText = 'width:'+oBoxW*cols+'px;margin:0 auto'
+
+
+		var hArr=[];
+		for(var i = 0;i<oBoxs.length;i++){
+			if(i<cols){
+				hArr.push(oBoxs[i].offsetHeight);
+			}else{
+				var minH = Math.min.apply(null,hArr);
+				var index = getMinhIndex(hArr,minH);
+
+				oBoxs[i].style.position = 'absolute';
+				oBoxs[i].style.top = minH+'px';
+				//oBoxs[i].style.left = oBoxW*index+'px';
+				oBoxs[i].style.left = oBoxs[index].offsetLeft+'px';
+
+				hArr[index]+=oBoxs[i].offsetHeight;
+			}
+		}
+	}
+
+
+//根据class获取元
+function getByClass(parent,clsName){
+	var boxArr = new Array();
+	oElements = parent.getElementsByTagName('*');
+	for(var i = 0;i<oElements.length;i++){
+		if(oElements[i].className == clsName){
+			boxArr.push(oElements[i]);
+		}
+	}
+	return boxArr;
+}
+
+function getMinhIndex(arr,val){
+	for(var i = 0;i<arr.length;i++){
+		if(arr[i]== val){
+			return i;
+		}
+	}
+}
+
+
+//检测是否具备加载数据块滚动条件
+function checkScrollSlide(){
+	var oParent = document.getElementById("main");
+	var oBoxs = getByClass(oParent,'box');
+
+	var lastBoxH = oBoxs[oBoxs.length - 1].offsetTop 
+	+ Math.floor(oBoxs[oBoxs.length - 1]).offsetHeight*0.5;
+
+	var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	var height = docuemt.body.clientHeight || document.documentElement.clientHeight;
+
+	return (lastBoxH<scrollTop+height)?true:false;
+}
+
+
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+
+
+	<div class="box"><div class="pic"><img src="images/0.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/1.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/2.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/3.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/4.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/5.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/6.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/7.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/8.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/9.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/10.jpg"/></div></div>
+
+	<div class="box"><div class="pic"><img src="images/11.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/12.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/13.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/14.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/15.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/16.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/17.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/18.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/19.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/20.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/21.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/22.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/23.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/24.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/25.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/26.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/27.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/28.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/29.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/30.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/22.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/23.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/24.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/25.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/26.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/27.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/28.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/29.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/30.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/26.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/27.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/28.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/29.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/30.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/30.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/26.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/27.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/28.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/29.jpg"/></div></div>
+	<div class="box"><div class="pic"><img src="images/30.jpg"/></div></div>
+
+</div>
+</body>
+
+
+
+</hmtl>

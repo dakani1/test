@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+</head>
+<body>
+    <input type="button" value="setItem" id="set"/>
+    <input type="button" value="getItem" id="get"/>
+    <input type="button" value="removeItem" id="remove"/>
+    <label>当前存储值<input type="text" value="storage" id="ipt"/></label>
+
+
+    <script>
+        var st=document.getElementById("set");
+        var gt=document.getElementById("get");
+        var remove=document.getElementById("remove");
+        var ipt=document.getElementById("ipt");
+
+        st.onclick=function (){
+            window.localStorage.setItem("name","123");
+            ipt.setAttribute("value",localStorage.name);
+            console.log(localStorage);
+        };
+    </script>
+
+
+
+
+</body>
+</html>

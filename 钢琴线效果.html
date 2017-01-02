@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="render" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title></title>
+    <!--<script src="package.js"></script>-->
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #main{
+            width: 1400px;
+            height: 500px;
+            border: 1px dashed red;
+            margin: 500px auto;
+        }
+
+        .musicWire{
+            position: relative;
+            height: 30px;
+            padding: 0;
+            border-bottom: 1px dashed green;
+        }
+
+        .musicWire span{
+            font-size: 16px;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<p class="musicWire">提出你的问题，分享你的经验，让学习变得轻松有趣……</p>
+<ul id="main">
+    <li class="musicWire">所有的工具都是为了解决时下项目的某个痛点</li>
+    <li class="musicWire">使开发人员更加敏捷的开发，大可不必追求最火热的技术</li>
+    <li class="musicWire">时下正是前端时代，日新月异，发展速度 飞快，每天都有新的库或者插件产生</li>
+    <li class="musicWire">作为前端开发者，我们要抓住、珍惜这场机遇，首先最重要的是把基本技术打牢。</li>
+    <li class="musicWire">不断进取，稳步向前，追赶我们的时代</li>
+</ul>
+
+<p class="musicWire">不断进取，稳步向前，追赶我们的时代</p>
+<script>
+    window.onload=function (){
+        var musicWire=getClass("musicWire");
+        for(var i=0;i<musicWire.length;i++){
+            var txt=musicWire[i].innerHTML;
+            musicWire[i].innerHTML=strSplit(txt);
+            var musicWireSpan=musicWire[i].getElementsByTagName("span");
+            postionChange(musicWireSpan);
+            moveJ(musicWireSpan,10);
+        }
+    };
+
+    function moveJ(arr,maxHeight){
+        for(var k=0;k<arr.length;k++){
+            arr[k].state=false;
+            arr[k].disY=0;
+            arr[k].oldY=0;
+            arr[k].index=k;
+            arr[k].onmouseover=function (ev){
+                var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+                this.state=true;
+                var e=ev||window.event;
+                this.disY= e.clientY+scrollTop;
+                this.oldY= e.clientY;
+            };
+
+            arr[k].onmousemove=function (ev){
+                if(this.state){
+                    var e=ev||window.event;
+                    var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+                    var nowY= e.clientY+scrollTop- this.disY;
+                    if(Math.abs(nowY)<=maxHeight){
+                        for(var m=0;m<Math.abs(nowY);m++){
+                            if(nowY>0){
+                                if((this.index-m)>-1){
+                                    arr[this.index-m].style.top=nowY-m+"px";
+                                }
+                                if((this.index+m)<arr.length){
+                                    arr[this.index+m].style.top=nowY-m+"px";
+                                }
+                            }else{
+                                if((this.index-m)>-1){
+                                    arr[this.index-m].style.top=nowY+m+"px";
+                                }
+                                if((this.index+m)<arr.length){
+                                    arr[this.index+m].style.top=nowY+m+"px";
+                                }
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+            };
+
+            arr[k].onmouseout=function (){
+                this.state=false;
+                this.disY=0;
+                this.oldY=0;
+                for(var n=0;n<arr.length;n++){
+                    arr[n].style.top=this.oldY+"px";
+                }
+            }
+        }
+    }
+
+
+    function strSplit(str,tag){
+        var splitArr=str.split("");
+        var html="";
+        tag=tag||"span";
+        for(var i=0;i<splitArr.length;i++){
+            if(splitArr[i]==" "){
+                splitArr[i]="&nbsp;";
+            }
+            html+="<"+tag+">"+splitArr[i]+"</"+tag+">";
+        }
+        console.log(splitArr);
+        return html;
+    }
+
+    function postionChange(arr){
+        var positionArr=[];
+        for(var i=0;i<arr.length;i++){
+            var oLeft=arr[i].offsetLeft;
+            var oTop=arr[i].offsetTop;
+            positionArr.push({
+                "left":oLeft,
+                "top":oTop
+            });
+        }
+        for(var j=0;j<positionArr.length;j++){
+            arr[j].style.position="absolute";
+            arr[j].style.left=positionArr[j].left+"px";
+            arr[j].style.top=positionArr[j].top+"px";
+        }
+
+    }
+
+
+    function getClass(cname){
+        if(document.getElementsByClassName){
+            return document.getElementsByClassName(cname);
+        }else{
+            var arr=[];
+            var re=/\s/g;
+            var tagName=document.getElementsByTagName("*");
+            for(var i=0;i<tagName.length;i++){
+                var classNameArr=tagName[i].className.split(re);
+                for(var j=0;j<classNameArr.length;j++){
+                    if(classNameArr[j]==cname){
+                        arr.push(tagName[i]);
+                    }
+                }
+            }
+            return arr;
+        }
+    }
+
+</script>
+</body>
+</html>
